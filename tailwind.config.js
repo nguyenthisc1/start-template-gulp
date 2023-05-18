@@ -4,8 +4,8 @@ module.exports = {
 
     theme: {
         fontFamily: {
-            // primary: ["'SVN-Mabry Pro', 'Arial', 'sans-serif'"],
-            // secondary: ["'SVN-Grand Slang', 'Arial', 'sans-serif'"],
+            primary: ["'SVN-Mabry Pro', 'Arial', 'sans-serif'"],
+            secondary: ["'SVN-Grand Slang', 'Arial', 'sans-serif'"],
         },
         extend: {
             screens: {
