@@ -1,0 +1,110 @@
+:root {
+    --t: 0.6s;
+    --color-primary: #000000;
+    --color-secondary: #ffffff;
+
+    // z-index
+    --z-cursor: 160;
+    --z-loading: 159;
+    --z-modal: 150;
+    --z-header: 111;
+    --z-nav: 110;
+    --z-button: 109;
+    --z-body: 5;
+    --z-hero: 4;
+
+    // cubic
+    --cubic-expoEaseOut: cubic-bezier(0.19, 1, 0.22, 1);
+    --cubic-quintEaseIn: cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+::selection {
+    @apply bg-primary text-white;
+}
+
+* {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    box-sizing: border-box;
+}
+html {
+    scroll-behavior: smooth;
+    // &::-webkit-scrollbar {
+    //     display: none;
+    // }
+}
+html.lenis {
+    height: auto;
+    overflow: hidden;
+}
+
+.lenis.lenis-smooth {
+    scroll-behavior: auto;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+    overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+    pointer-events: none;
+}
+body {
+    @apply b1 font-primary font-light text-black;
+    &.scroll-hidden,
+    &.tt-ol-menu-open {
+        overflow: hidden !important;
+    }
+    // @media (min-width: theme("screens.lg")) {
+    //     &::-webkit-scrollbar {
+    //         width: 10px;
+    //     }
+
+    //     &::-webkit-scrollbar-track {
+    //         @apply bg-white;
+    //     }
+    //     &::-webkit-scrollbar-thumb {
+    //         @apply bg-primary;
+    //     }
+    // }
+}
+
+// section {
+//     @apply bg-white;
+// }
+
+// section {
+//     @apply pt-16 md:pt-16 lg:pt-24;
+//     &:first-of-type {
+//         @apply mt-0;
+//     }
+//     &::before {
+//         position: fixed;
+//         content: "";
+//     }
+// }
+
+img {
+    @apply object-cover;
+}
+
+
+
+.b1 {
+    @apply text-base leading-[1.625rem] md:text-lg md:leading-7;
+}
+
+.b2 {
+    @apply text-xs leading-6 md:text-[.9375rem] md:leading-[1.5625rem];
+}
+
+.tag {
+    @apply text-sm font-light tracking-widest md:text-lg md:leading-7;
+}

@@ -1,0 +1,53 @@
+.h-screen-view {
+    height: calc(var(--vh, 1vh) * 100);
+}
+
+.py-section {
+    @apply py-16 lg:py-32;
+}
+
+.pt-section {
+    @apply pt-16 lg:pt-32;
+}
+
+.pb-section {
+    @apply pb-16 lg:pb-32;
+}
+
+.my-section {
+    @apply my-16 lg:my-32;
+}
+
+.mt-section {
+    @apply mt-16 lg:mt-32;
+}
+
+.mb-section {
+    @apply mb-16 lg:mb-32;
+}
+
+.space-y-section {
+    @apply space-y-16 lg:space-y-32;
+}
+
+.space-x-section {
+    @apply space-x-16 lg:space-x-32;
+}
+
+.grid-layout {
+    @apply grid grid-cols-1 md:grid-cols-8 md:gap-6 lg:grid-cols-12;
+}
+
+.hide-scrollbar {
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+.\!mix-blend-normal {
+    mix-blend-mode: normal !important;
+}
+
+.cursor-pointer {
+    cursor: pointer !important;
+}

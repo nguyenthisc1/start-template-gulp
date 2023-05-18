@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    @import './assets/style/base';
+}
+
+@layer components {
+    @import './assets/style/loading';
+    @import './assets/style/header';
+    @import './assets/style/footer';
+    @import './assets/style/nav';
+    @import './assets/style/elements';
+    @import './assets/style/components';
+    @import './assets/style/anim';
+}
+
+@layer utilities {
+    @import './assets/style/util';
+}
+
+@import './assets/style/libs';

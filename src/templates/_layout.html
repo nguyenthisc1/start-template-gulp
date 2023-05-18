@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Begin SEO -->
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+        <!-- Begin favicon -->
+        <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png" />
+        <link rel="manifest" href="/assets/images/site.webmanifest" />
+        <meta name="msapplication-TileColor" content="#da532c" />
+        <meta name="theme-color" content="#ffffff" />
+        <!-- End favicon -->
+
+        <!-- HTML Meta Tags -->
+        <title>Alpha Creative</title>
+        <meta name="description" content="Alpha Creative" />
+        <meta name="robots" content="nofollow, noindex" />
+        <!-- Facebook Meta Tags -->
+        <meta property="og:url" content="" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Alpha Creative" />
+        <meta property="og:description" content="Alpha Creative" />
+        <meta property="og:image" content="/assets/images/symbol.svg" />
+
+        <!-- Twitter Meta Tags -->
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta property="twitter:domain" content="" />
+        <meta property="twitter:url" content="" />
+        <meta name="twitter:title" content="Alpha Creative" />
+        <meta name="twitter:description" content="Alpha Creative" />
+        <meta name="twitter:image" content="/assets/images/symbol.svg" />
+        <!-- End SEO -->
+
+        <!-- Begin Link -->
+        <link rel="stylesheet" href="assets/fonts/fonts.css" />
+
+        <link rel="stylesheet" href="assets/css/index.css" />
+        <!-- End Link -->
+    </head>
+
+    <body class="tt-transition tt-magic-cursor tt-scroll-social tt-scroll-smooth" id="body" data-lenis-duration="0.3">
+        <!-- ======================== Begin loading ======================== -->
+        <div class="loading">
+            <!-- Begin loading wrapper -->
+            <div class="loading-wrapper">
+                <!-- Begin symbol -->
+                <div class="logo-symbol">
+                    <img loading="eager" class="logo-symbol__image" src="./assets/images/symbol_white.svg" alt="symbol" />
+                </div>
+                <!-- End symbol -->
+
+                <div class="loading-wrapper__inner">
+                    <!-- Begin loading logo -->
+                    <div class="loading-logo">
+                        <img loading="eager" class="loading-icon" src="/assets/images/logo_icon.svg" alt="logo" />
+                        <div class="logo-circle">
+                            <div class="logo-circle__image anim-spin-out bg-[url('../images/logo_circle.svg')]"></div>
+                        </div>
+                    </div>
+                    <!-- End loading logo -->
+
+                    <!-- Begin loading text -->
+                    <div class="loading-text h1-secondary">Xin chào!</div>
+                    <div class="loading-desc h3">We are brand storytellers.</div>
+                    <!-- End loading text -->
+                </div>
+            </div>
+            <!-- End loading wrapper -->
+        </div>
+        <!-- End loading -->
+
+        <!-- ======================== Begin magic cursor ======================== -->
+        <div id="magic-cursor">
+            <div id="ball"></div>
+        </div>
+        <!-- End magic cursor -->
+
+        {% include './_header.html' %}
+
+        <!-- *************************************
+        *********** Begin Main *************
+        ************************************** -->
+        <main class="main">{% block main %}{% endblock %}</main>
+        <!-- End main -->
+
+        {%include './_footer.html' %}
+
+        <!-- Begin script -->
+        <!-- JQUERY -->
+        <script defer src="assets/js/jquery.min.js"></script>
+        <!-- LENIS -->
+        <script defer src="assets/js/lenis.min.js"></script>
+        <!-- LAZYLOAD -->
+        <script defer src="assets/js/lazyload.min.js"></script>
+        <!-- LETTERING -->
+        <script defer src="assets/js/lettering.js"></script>
+        <!-- GSAP -->
+        <script defer src="assets/js/gsap.min.js"></script>
+        <!-- SCROLL TRIGGER -->
+        <script defer src="assets/js/scrollTrigger.min.js"></script>
+        <!-- CSSRULE -->
+        <script defer src="assets/js/CSSRulePlugin.min.js"></script>
+        <!-- PIXI -->
+        <script async src="assets/js/pixi.min.js"></script>
+        <!-- SWIPER -->
+        <script defer src="assets/js/swiper-bundle.min.js"></script>
+        <!-- JQUERY WATER RIPPLE -->
+        <script defer src="assets/js/jquery-ripple.min.js"></script>
+        <!-- INTERACTJS -->
+        <script defer src="assets/js/interact.min.js"></script>
+        <!-- LIGHTGALLERY -->
+        <script defer src="assets/js/lightgallery.min.js"></script>
+        <!-- LGVIDEO -->
+        <script defer src="assets/js/lg-video.min.js"></script>
+        <!-- LGZOOMs -->
+        <script defer src="assets/js/lg-zoom.min.js"></script>
+        <!-- CORE -->
+        <script defer src="assets/js/index.js"></script>
+
+        <!-- End script -->
+    </body>
+</html>

@@ -1,0 +1,151 @@
+.container {
+    @apply px-6 lg:max-w-[1180px] xl:px-0;
+}
+
+
+.magic-slider-button {
+    @apply static inset-auto m-0 block h-12 w-12;
+    &::after {
+        @apply hidden;
+    }
+}
+
+/* ------------------------------------------------------------- *
+ * magic cursor
+/* ------------------------------------------------------------- */
+
+#magic-cursor {
+    @apply pointer-events-none absolute z-[var(--z-cursor)] hidden h-[10px] w-[10px] cursor-none opacity-0 mix-blend-difference;
+}
+
+#ball {
+    @apply pointer-events-none fixed flex cursor-none items-center justify-center rounded-full border border-solid border-white text-white;
+}
+
+.magnetic-wrap {
+    @apply relative flex cursor-none items-center justify-center;
+}
+
+.anim-nav-bg {
+    @apply pointer-events-none absolute inset-0 bg-cover bg-center bg-no-repeat;
+}
+
+.cursor-pn-image {
+    @apply hidden h-full w-full;
+    img {
+        @apply h-full w-full object-cover;
+    }
+}
+
+.magic-cursor-slider {
+    @apply cursor-none;
+}
+
+.not-hide-cursor {
+    // @apply cursor-none;
+}
+
+.cursor-page-nav {
+    @apply relative z-20 cursor-none mix-blend-difference;
+}
+
+.cursor-page-link {
+    @apply relative z-20 cursor-none;
+}
+
+.tt-pn-scroll {
+    @apply w-full max-w-[800px] text-center;
+}
+
+.tt-pn-title {
+    @apply relative left-1/2 block overflow-hidden whitespace-nowrap leading-[1.6] opacity-40;
+    font-size: clamp(42px, 6vw, 110px);
+    transform: translate3d(-50%, 0, 0);
+    transition: transform 0.6s cubic-bezier(0.51, 0.57, 0.17, 1);
+    text-overflow: ellipsis;
+}
+
+.tt-pn-hover-title {
+    @apply absolute left-1/2 whitespace-nowrap leading-[1.6];
+    font-size: clamp(36px, 6vw, 110px);
+    transform: translate3d(-50%, 100%, 0);
+    transition: transform 0.6s cubic-bezier(0.51, 0.57, 0.17, 1);
+    span {
+        @apply inline-flex items-center pr-[5vw];
+        @media (min-width: theme('screens.lg')) {
+            animation: marquee 7s linear infinite;
+            animation-play-state: paused;
+        }
+        // &::after {
+        //     @apply absolute right-[1.9vw] top-[56%] block h-[0.8vw] w-[0.8vw] rounded-full bg-primary content-[''];
+        //     transform: translate3d(0, -50%, 0);
+        // }
+    }
+}
+
+.tt-pn-link {
+    @apply relative flex flex-col items-start overflow-hidden;
+    &:hover {
+        .tt-pn-hover-title {
+            transform: translate3d(-50%, 0, 0);
+            transition-delay: 0.1s;
+            span {
+                @media (min-width: theme('screens.lg')) {
+                    animation-play-state: running;
+                }
+            }
+        }
+
+        .tt-pn-title {
+            transform: translate3d(-50%, -100%, 0);
+            transition-delay: 0.1s;
+        }
+    }
+}
+
+#magic-cursor.pn-hover-on {
+    z-index: 11;
+}
+
+#magic-cursor.pn-hover-on {
+    #ball {
+        z-index: -1;
+        @apply overflow-hidden border-none;
+        .cursor-pn-image {
+            @apply block;
+        }
+    }
+}
+
+/* Ball view
+============= */
+#ball .ball-view {
+    @apply invisible absolute h-full w-full scale-0 text-center text-sm opacity-0;
+}
+
+.cursor-pn-discover {
+    @apply absolute top-1/2 flex h-8 -translate-y-1/2 cursor-pointer items-center overflow-hidden pl-5;
+    &.--left {
+        @apply right-full pr-5;
+    }
+    span {
+        @apply block translate-y-8 whitespace-nowrap text-lg uppercase;
+    }
+}
+
+.cursor-slider {
+    background: url(../images/ic_arrow_right.svg) center/contain no-repeat;
+    @apply absolute left-1/2 top-1/2 h-6 w-5 -translate-x-1/2 -translate-y-1/2 cursor-none transition-transform duration-[var(--t)];
+
+    &.prev {
+        @apply -rotate-180;
+    }
+}
+/* ------------------------------------------------------------- *
+ * magic cursor
+/* ------------------------------------------------------------- */
+
+.tt-draggable,
+.tt-draggable * {
+    @apply touch-none;
+}
