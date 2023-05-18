@@ -31,7 +31,7 @@ const css = () =>
         .pipe(sass())
         .pipe(postcss([tailwindcss('tailwind.config.js'), require('autoprefixer')]))
         .pipe(concat({path: 'index.css'}))
-        // .pipe(uglifycss())
+        .pipe(uglifycss())
         .pipe(dest('public/assets/css'));
 
 const img = () => src('src/assets/images/**/*').pipe(imagemin()).pipe(dest('public/assets/images'));
