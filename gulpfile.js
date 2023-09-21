@@ -27,7 +27,7 @@ let cache;
 
 const html = () => src('src/*.html').pipe(nunjucks.compile()).pipe(formatHtml()).pipe(dest('public'));
 const css = () =>
-    src('src/index.scss')
+    src('src/assets/style/index.scss')
         .pipe(sass())
         .pipe(postcss([tailwindcss('tailwind.config.js'), require('autoprefixer')]))
         .pipe(concat({path: 'index.css'}))
@@ -44,7 +44,7 @@ const minLibs = () => src(['src/assets/js/*.js']).pipe(uglify()).pipe(dest('publ
 
 const js = () =>
     rollup({
-        input: './src/index.js',
+        input: './src/assets/js/index.js',
         plugins: [commonjs(), nodeResolve(), IS_RPOD && babelPlugin],
         cache,
     })
