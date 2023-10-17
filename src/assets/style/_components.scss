@@ -1,0 +1,22 @@
+.magic-cursor-slider {
+  @apply select-none;
+}
+
+
+// Begin modal
+.modal {
+  @apply invisible fixed inset-0 z-[var(--z-modal)] bg-black/80 opacity-0 transition-[opacity,visibility] delay-300 duration-[var(--t)];
+  &.active {
+      @apply visible opacity-100 delay-[0s];
+      .modal-wrapper {
+          @apply translate-y-0 opacity-100 delay-300;
+      }
+  }
+  &-wrapper {
+      @apply h-screen-view flex w-full items-center justify-center opacity-0 transition-[transform,opacity] duration-[var(--t)];
+  }
+  &-wrapper__inner {
+      @apply relative h-full overflow-y-auto lg:overflow-hidden;
+  }
+}
+// End modal

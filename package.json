@@ -1,34 +1,28 @@
 {
     "name": "gulp",
     "version": "1.0.0",
-    "description": "",
+    "description": "gulpfile build",
     "main": "gulpfile.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "start": "gulp",
         "build": "gulp build"
     },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/alpha-creative/gulp.git"
-    },
-    "author": "",
+    "author": "nguynthisc1@gmail.com",
     "license": "ISC",
-    "bugs": {
-        "url": "https://github.com/alpha-creative/beta/issues"
-    },
-    "homepage": "https://github.com/alpha-creative/beta#readme",
     "devDependencies": {
-        "@babel/core": "^7.21.4",
-        "@babel/preset-env": "^7.21.4",
+        "@babel/core": "^7.23.2",
+        "@babel/preset-env": "^7.23.2",
         "@rollup/plugin-babel": "^5.3.1",
         "@rollup/plugin-commonjs": "^22.0.2",
         "@rollup/plugin-node-resolve": "^13.3.0",
+        "@studio-freight/lenis": "^1.0.27",
         "@tailwindcss/line-clamp": "^0.4.4",
         "@thoughtbot/tailwindcss-aria-attributes": "^0.2.0",
-        "autoprefixer": "^10.4.14",
-        "browser-sync": "^2.29.1",
+        "autoprefixer": "^10.4.16",
+        "browser-sync": "^2.29.3",
         "concurrently": "^7.6.0",
+        "gsap": "^3.12.2",
         "gulp": "^4.0.2",
         "gulp-autoprefixer": "^6.1.0",
         "gulp-clean-css": "^4.3.0",
@@ -43,23 +37,28 @@
         "gulp-sourcemaps": "^3.0.0",
         "gulp-uglify": "^3.0.2",
         "gulp-uglifycss": "^1.1.0",
-        "postcss": "^8.4.22",
-        "prettier": "^2.8.7",
-        "prettier-plugin-tailwindcss": "^0.2.7",
+        "letteringjs": "^0.7.0",
+        "lightgallery": "^2.7.2",
+        "postcss": "^8.4.31",
+        "prettier": "^2.8.8",
+        "prettier-plugin-tailwindcss": "^0.2.8",
         "rollup": "^2.79.1",
+        "rollup-plugin-uglify": "^6.0.4",
+        "swiper": "^10.3.1",
         "tailwind-scrollbar": "^2.1.0",
-        "tailwindcss": "^3.3.1"
+        "tailwindcss": "^3.3.3",
+        "vanilla-lazyload": "^17.8.5"
     },
     "browserslist": {
-      "production": [
-        ">0.2%",
-        "not dead",
-        "not op_mini all"
-      ],
-      "development": [
-        "last 1 chrome version",
-        "last 1 firefox version",
-        "last 1 safari version"
-      ]
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
     }
 }

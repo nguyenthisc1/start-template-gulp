@@ -1,4 +1,4 @@
-const {src, dest, watch, series, parallel} = require('gulp');
+const { src, dest, watch, series, parallel } = require('gulp');
 const autoprefixer = require('gulp-autoprefixer');
 const formatHtml = require('gulp-format-html');
 const nunjucks = require('gulp-nunjucks');
@@ -6,10 +6,11 @@ const imagemin = require('gulp-imagemin');
 const uglifycss = require('gulp-uglifycss');
 const sass = require('gulp-dart-sass');
 const sync = require('browser-sync').create();
-const {rollup} = require('rollup');
-const {babel} = require('@rollup/plugin-babel');
+const { rollup } = require('rollup');
+const uglifyRollup  = require('rollup-plugin-uglify');
+const { babel } = require('@rollup/plugin-babel');
 const commonjs = require('@rollup/plugin-commonjs');
-const {nodeResolve} = require('@rollup/plugin-node-resolve');
+const { nodeResolve } = require('@rollup/plugin-node-resolve');
 const postcss = require('gulp-postcss');
 const tailwindcss = require('tailwindcss');
 const concat = require('gulp-concat');
@@ -20,7 +21,7 @@ const IS_RPOD = process.env.NODE_ENV === 'production';
 const babelPlugin = babel({
     babelHelpers: 'assetsd',
     exclude: [/node_module/],
-    presets: [['@babel/preset-env', {targets: ['defaults'], useBuiltIns: 'usage', corejs: '3.6.5'}]],
+    presets: [['@babel/preset-env', { targets: ['defaults'], useBuiltIns: 'usage', corejs: '3.6.5' }]],
 });
 
 let cache;
@@ -30,7 +31,7 @@ const css = () =>
     src('src/assets/style/index.scss')
         .pipe(sass())
         .pipe(postcss([tailwindcss('tailwind.config.js'), require('autoprefixer')]))
-        .pipe(concat({path: 'index.css'}))
+        .pipe(concat({ path: 'index.css' }))
         .pipe(uglifycss())
         .pipe(dest('public/assets/css'));
 
@@ -40,12 +41,12 @@ const copy = () =>
         base: 'src',
     }).pipe(dest('public'));
 
-const minLibs = () => src(['src/assets/js/*.js']).pipe(uglify()).pipe(dest('public/assets/js/'));
+// const minLibs = () => src(['src/assets/js/*.js']).pipe(uglify()).pipe(dest('public/assets/js/'));
 
 const js = () =>
     rollup({
         input: './src/assets/js/index.js',
-        plugins: [commonjs(), nodeResolve(), IS_RPOD && babelPlugin],
+        plugins: [uglifyRollup.uglify(), commonjs(), nodeResolve(), IS_RPOD && babelPlugin],
         cache,
     })
         .then((b) => ((cache = b.cache), b))
@@ -58,7 +59,7 @@ const js = () =>
         );
 
 const watchTask = () => {
-    sync.init({notify: false, server: {baseDir: 'public'}});
+    sync.init({ notify: false, server: { baseDir: 'public' } });
     watch(`src/**/*.scss`, css).on('change', sync.reload);
     watch('src/**/*.js', js).on('change', sync.reload);
     watch('src/**/*.html', series(html, css)).on('change', sync.reload);
@@ -66,7 +67,7 @@ const watchTask = () => {
     watch(['src/assets/fonts/**', 'src/assets/videos/**'], copy).on('change', sync.reload);
 };
 
-const build = parallel(html, css, minLibs, img, js, copy);
+const build = parallel(html, css, img, js, copy);
 
 exports.js = js;
 exports.css = css;
