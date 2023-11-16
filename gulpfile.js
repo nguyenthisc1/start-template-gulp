@@ -30,14 +30,14 @@ const html = () => src('src/*.html').pipe(nunjucks.compile()).pipe(formatHtml())
 const css = () =>
     src('src/assets/style/index.scss')
         .pipe(sass())
-        .pipe(postcss([tailwindcss('tailwind.config.js'), require('autoprefixer')]))
+        .pipe(postcss([tailwindcss('tailwind.config.js'), autoprefixer]))
         .pipe(concat({ path: 'index.css' }))
         .pipe(uglifycss())
         .pipe(dest('public/assets/css'));
 
 const img = () => src('src/assets/images/**/*').pipe(imagemin()).pipe(dest('public/assets/images'));
 const copy = () =>
-    src(['src/assets/fonts/**', 'src/assets/videos/**'], {
+    src(['src/assets/fonts/**', 'src/assets/videos/**', 'src/assets/js/**'], {
         base: 'src',
     }).pipe(dest('public'));
 
@@ -45,7 +45,7 @@ const copy = () =>
 
 const js = () =>
     rollup({
-        input: './src/assets/js/index.js',
+        input: './src/assets/script/index.js',
         plugins: [uglifyRollup.uglify(), commonjs(), nodeResolve(), IS_RPOD && babelPlugin],
         cache,
     })
@@ -71,5 +71,6 @@ const build = parallel(html, css, img, js, copy);
 
 exports.js = js;
 exports.css = css;
+exports.img = img;
 exports.build = build;
 exports.default = series(build, watchTask);

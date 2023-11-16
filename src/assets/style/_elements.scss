@@ -2,7 +2,6 @@
     @apply px-6 lg:max-w-[1180px] xl:px-0;
 }
 
-
 .magic-slider-button {
     @apply static inset-auto m-0 block h-12 w-12;
     &::after {
@@ -16,6 +15,12 @@
 
 #magic-cursor {
     @apply pointer-events-none absolute z-[var(--z-cursor)] hidden h-[10px] w-[10px] cursor-none opacity-0 mix-blend-difference;
+}
+
+.tt-magic-cursor {
+    [data-cursor] {
+        @apply cursor-none;
+    }
 }
 
 #ball {
@@ -124,18 +129,18 @@
 }
 
 .cursor-pn-discover {
-    @apply absolute top-1/2 flex h-8 -translate-y-1/2 cursor-pointer items-center overflow-hidden pl-5;
+    @apply absolute left-1/2 top-1/2 flex h-8 -translate-x-1/2 -translate-y-1/2 cursor-none items-center justify-center overflow-hidden;
     &.--left {
         @apply right-full pr-5;
     }
     span {
-        @apply block translate-y-8 whitespace-nowrap text-lg uppercase;
+        @apply b1 block whitespace-nowrap text-primary;
     }
 }
 
 .cursor-slider {
     background: url(../images/ic_arrow_right.svg) center/contain no-repeat;
-    @apply absolute left-1/2 top-1/2 h-6 w-5 -translate-x-1/2 -translate-y-1/2 cursor-none transition-transform duration-[var(--t)];
+    @apply absolute left-1/2 top-1/2 h-9 w-9 -translate-x-1/2 -translate-y-1/2 cursor-none transition-transform duration-[var(--t)];
 
     &.prev {
         @apply -rotate-180;
@@ -150,70 +155,122 @@
     @apply touch-none;
 }
 
-
 .tt-magic-cursor {
-  #magic-cursor {
-      @apply block;
-  }
+    #magic-cursor {
+        @apply block;
+    }
+}
+
+.tt-image {
+    @apply relative h-auto w-full overflow-hidden pb-[65%];
+    > div,
+    img {
+        @apply absolute left-0 top-0 h-full w-full object-cover object-center;
+    }
+}
+
+.tt-link-hover {
+    @apply relative cursor-pointer;
+    &.active-link,
+    &:hover {
+        @apply before:origin-left before:scale-x-100;
+    }
+    &::before {
+        @apply bg-dark absolute -bottom-1 h-[1px] w-full origin-right scale-x-0 transition-transform duration-[var(--t)] content-[''];
+    }
 }
 
 .tt-video {
-  @apply relative overflow-hidden;
-  iframe {
-      @apply absolute left-1/2 top-1/2 h-full w-full -translate-x-1/2 -translate-y-1/2;
-  }
-  @media (min-aspect-ratio: 16/9) {
-      iframe {
-          /* height = 100 * (9 / 16) = 56.25 */
-          height: 60.25vw;
-      }
-  }
-  @media (max-aspect-ratio: 16/9) {
-      iframe {
-          /* width = 100 / (9 / 16) = 177.777777 */
-          width: 200.78vh;
-      }
-  }
+    @apply relative overflow-hidden;
+    iframe {
+        @apply absolute left-1/2 top-1/2 h-full w-full -translate-x-1/2 -translate-y-1/2;
+    }
+    @media (min-aspect-ratio: 16/9) {
+        iframe {
+            /* height = 100 * (9 / 16) = 56.25 */
+            height: 60.25vw;
+        }
+    }
+    @media (max-aspect-ratio: 16/9) {
+        iframe {
+            /* width = 100 / (9 / 16) = 177.777777 */
+            width: 200.78vh;
+        }
+    }
+}
+
+.hamburger {
+    @apply relative h-6 w-8 px-2 pl-0;
+    span {
+        @apply absolute left-0 block h-[1px] w-7 rounded-full bg-primary transition-all duration-[var(--t)];
+
+        &:nth-of-type(1) {
+            @apply top-1;
+        }
+
+        &:nth-of-type(2) {
+            @apply top-1/2 -translate-y-1/2;
+        }
+
+        &:nth-of-type(3) {
+            @apply bottom-1 w-5;
+        }
+    }
+
+    &.active {
+        span {
+            &:nth-of-type(1) {
+                @apply left-1/2 top-1/2 w-full -translate-x-1/2 -translate-y-1/2 rotate-45;
+            }
+
+            &:nth-of-type(2) {
+                @apply w-0;
+            }
+
+            &:nth-of-type(3) {
+                @apply bottom-1/2 left-1/2 w-full -translate-x-1/2 translate-y-1/2 -rotate-45;
+            }
+        }
+    }
 }
 
 .contact-form {
-  input:-webkit-autofill,
-  input:-webkit-autofill:hover,
-  input:-webkit-autofill:focus,
-  textarea:-webkit-autofill,
-  textarea:-webkit-autofill:hover,
-  textarea:-webkit-autofill:focus,
-  select:-webkit-autofill,
-  select:-webkit-autofill:hover,
-  select:-webkit-autofill:focus {
-      -webkit-box-shadow: 0 0 0px 1000px transparent inset;
-      transition: background-color 5000s ease-in-out 0s;
-      -webkit-text-fill-color: #fff;
-  }
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
+    textarea:-webkit-autofill,
+    textarea:-webkit-autofill:hover,
+    textarea:-webkit-autofill:focus,
+    select:-webkit-autofill,
+    select:-webkit-autofill:hover,
+    select:-webkit-autofill:focus {
+        -webkit-box-shadow: 0 0 0px 1000px transparent inset;
+        transition: background-color 5000s ease-in-out 0s;
+        -webkit-text-fill-color: #fff;
+    }
 }
 
 .modal-contact-form {
-  input:-webkit-autofill,
-  input:-webkit-autofill:hover,
-  input:-webkit-autofill:focus,
-  textarea:-webkit-autofill,
-  textarea:-webkit-autofill:hover,
-  textarea:-webkit-autofill:focus,
-  select:-webkit-autofill,
-  select:-webkit-autofill:hover,
-  select:-webkit-autofill:focus {
-      -webkit-box-shadow: 0 0 0px 1000px transparent inset;
-      transition: background-color 5000s ease-in-out 0s;
-      -webkit-text-fill-color: var(--color-dark);
-  }
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
+    textarea:-webkit-autofill,
+    textarea:-webkit-autofill:hover,
+    textarea:-webkit-autofill:focus,
+    select:-webkit-autofill,
+    select:-webkit-autofill:hover,
+    select:-webkit-autofill:focus {
+        -webkit-box-shadow: 0 0 0px 1000px transparent inset;
+        transition: background-color 5000s ease-in-out 0s;
+        -webkit-text-fill-color: var(--color-dark);
+    }
 }
 
-
 [data-split-text] {
-  span {
-      @apply inline-block;
-      span {
-          @apply inline-block;
-      }
-  }
+    span {
+        @apply inline-block;
+        span {
+            @apply inline-block;
+        }
+    }
 }

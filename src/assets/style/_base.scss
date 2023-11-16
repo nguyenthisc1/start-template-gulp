@@ -2,16 +2,20 @@
     --t: 0.6s;
     --color-primary: #000000;
     --color-secondary: #ffffff;
+    --color-dark: #011a10;
 
     // z-index
     --z-cursor: 160;
     --z-loading: 159;
     --z-modal: 150;
+    --z-social: 110;
     --z-header: 111;
     --z-nav: 110;
     --z-button: 109;
     --z-body: 5;
     --z-hero: 4;
+
+    --height-header: 64px;
 
     // cubic
     --cubic-expoEaseOut: cubic-bezier(0.19, 1, 0.22, 1);

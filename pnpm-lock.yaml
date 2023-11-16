@@ -38,9 +38,6 @@ devDependencies:
   concurrently:
     specifier: ^7.6.0
     version: 7.6.0
-  gsap:
-    specifier: ^3.12.2
-    version: 3.12.2
   gulp:
     specifier: ^4.0.2
     version: 4.0.2
@@ -89,6 +86,12 @@ devDependencies:
   lightgallery:
     specifier: ^2.7.2
     version: 2.7.2
+  lightpick:
+    specifier: ^1.6.2
+    version: 1.6.2
+  moment:
+    specifier: ^2.29.4
+    version: 2.29.4
   postcss:
     specifier: ^8.4.31
     version: 8.4.31
@@ -4212,10 +4215,6 @@ packages:
     resolution: {integrity: sha512-RbJ5/jmFcNNCcDV5o9eTnBLJ/HszWV0P73bc+Ff4nS/rJj+YaS6IGyiOL0VoBYX+l1Wrl3k63h/KrH+nhJ0XvQ==}
     dev: true
 
-  /gsap@3.12.2:
-    resolution: {integrity: sha512-EkYnpG8qHgYBFAwsgsGEqvT1WUidX0tt/ijepx7z8EUJHElykg91RvW1XbkT59T0gZzzszOpjQv7SE41XuIXyQ==}
-    dev: true
-
   /gulp-autoprefixer@6.1.0:
     resolution: {integrity: sha512-Ti/BUFe+ekhbDJfspZIMiOsOvw51KhI9EncsDfK7NaxjqRm+v4xS9v99kPxEoiDavpWqQWvG8Y6xT1mMlB3aXA==}
     engines: {node: '>=6'}
@@ -5365,6 +5364,13 @@ packages:
     engines: {node: '>=6.0.0'}
     dev: true
 
+  /lightpick@1.6.2:
+    resolution: {integrity: sha512-xQmKL6pvtKnLGI8sOgclgc/k6G8FvyjdfQy4nOm0iywD44gkER0ia7SR9cthdUIkkcDBFNHH8SfbPQJ33QF8fQ==}
+    deprecated: Unmaintained in favor of Litepicker. Please use https://github.com/wakirin/Litepicker
+    dependencies:
+      moment: 2.29.4
+    dev: true
+
   /lilconfig@2.1.0:
     resolution: {integrity: sha512-utWOt/GHzuUxnLKxB6dk81RoOeoNeHgbrXiuGk4yyF5qlRz+iIVWu56E2fqGHFrXz0QNUhLB/8nKqvRH66JKGQ==}
     engines: {node: '>=10'}
@@ -5729,6 +5735,10 @@ packages:
       minimist: 1.2.8
     dev: true
     optional: true
+
+  /moment@2.29.4:
+    resolution: {integrity: sha512-5LC9SOxjSc2HF6vO2CyuTDNivEdoz2IvyJJGj6X8DJ0eFyfszE0QiEd+iXmBvUP3WHxSjFH/vIsA0EN00cgr8w==}
+    dev: true
 
   /mozjpeg@6.0.1:
     resolution: {integrity: sha512-9Z59pJMi8ni+IUvSH5xQwK5tNLw7p3dwDNCZ3o1xE+of3G5Hc/yOz6Ue/YuLiBXU3ZB5oaHPURyPdqfBX/QYJA==}
