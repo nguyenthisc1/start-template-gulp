@@ -7,7 +7,7 @@ const uglifycss = require('gulp-uglifycss');
 const sass = require('gulp-dart-sass');
 const sync = require('browser-sync').create();
 const { rollup } = require('rollup');
-const uglifyRollup  = require('rollup-plugin-uglify');
+const uglifyRollup = require('rollup-plugin-uglify');
 const { babel } = require('@rollup/plugin-babel');
 const commonjs = require('@rollup/plugin-commonjs');
 const { nodeResolve } = require('@rollup/plugin-node-resolve');
@@ -41,9 +41,24 @@ const copy = () =>
         base: 'src',
     }).pipe(dest('public'));
 
-// const minLibs = () => src(['src/assets/js/*.js']).pipe(uglify()).pipe(dest('public/assets/js/'));
+const minLibs = () => src(['src/assets/libs/*.js']).pipe(uglify()).pipe(dest('public/assets/libs/'));
 
 const js = () =>
+    rollup({
+        input: './src/assets/script/script.js',
+        plugins: [uglifyRollup.uglify(), commonjs(), nodeResolve(), IS_RPOD && babelPlugin],
+        cache,
+    })
+        .then((b) => ((cache = b.cache), b))
+        .then((b) =>
+            b.write({
+                file: 'public/assets/js/script.js',
+                format: 'iife',
+                sourcemap: IS_RPOD,
+            })
+        );
+
+const bundlelibs = () =>
     rollup({
         input: './src/assets/script/index.js',
         plugins: [uglifyRollup.uglify(), commonjs(), nodeResolve(), IS_RPOD && babelPlugin],
@@ -67,7 +82,7 @@ const watchTask = () => {
     watch(['src/assets/fonts/**', 'src/assets/videos/**'], copy).on('change', sync.reload);
 };
 
-const build = parallel(html, css, img, js, copy);
+const build = parallel(html, css, img, js, copy, minLibs, bundlelibs);
 
 exports.js = js;
 exports.css = css;

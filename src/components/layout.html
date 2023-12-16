@@ -57,7 +57,7 @@
         </div>
         <!-- End magic cursor -->
 
-        {% include './_header.html' %}
+        {% include './header.html' %}
 
         <!-- *************************************
         *********** Begin Main *************
@@ -65,14 +65,16 @@
         <main class="main">{% block main %}{% endblock %}</main>
         <!-- End main -->
 
-        {%include './_footer.html' %}
+        {%include './footer.html' %}
 
         <!-- Begin script -->
-        <script defer src="assets/js/jquery.min.js"></script>
-        <script defer src="assets/js/lettering.js"></script>
-        <script defer src="assets/js/gsap.min.js"></script>
-        <script defer src="assets/js/scrollTrigger.min.js"></script>
-        <script defer src="assets/js/lettering.js"></script>
+        <script defer src="assets/libs/jquery.min.js"></script>
+        <script defer src="assets/libs/lettering.js"></script>
+        <script defer src="assets/libs/gsap.min.js"></script>
+        <script defer src="assets/libs/scrollTrigger.min.js"></script>
+        <script defer src="assets/libs/lettering.js"></script>
+        <script defer src="assets/js/index.js"></script>
+        <script defer src="assets/js/script.js"></script>
         <!-- End script -->
     </body>
 </html>
