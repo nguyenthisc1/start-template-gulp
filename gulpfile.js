@@ -15,8 +15,10 @@ const postcss = require('gulp-postcss');
 const tailwindcss = require('tailwindcss');
 const concat = require('gulp-concat');
 const uglify = require('gulp-uglify');
-
-const IS_RPOD = process.env.NODE_ENV === 'production';
+const fs = require('fs');
+const data = require('gulp-data');
+const path = require('path');
+const IS_PROD = process.env.NODE_ENV === 'production';
 
 const babelPlugin = babel({
     babelHelpers: 'assetsd',
@@ -26,7 +28,13 @@ const babelPlugin = babel({
 
 let cache;
 
-const html = () => src('src/*.html').pipe(nunjucks.compile()).pipe(formatHtml()).pipe(dest('public'));
+const html = () =>
+    src('src/*.html')
+        .pipe(data((file) => JSON.parse(fs.readFileSync('./src/assets/data/' + path.basename(file.path) + '.json'))))
+        .pipe(nunjucks.compile())
+        .pipe(formatHtml())
+        .pipe(dest('public'));
+
 const css = () =>
     src('src/assets/style/index.scss')
         .pipe(sass())
@@ -35,18 +43,19 @@ const css = () =>
         .pipe(uglifycss())
         .pipe(dest('public/assets/css'));
 
-const img = () => src('src/assets/images/**/*').pipe(imagemin()).pipe(dest('public/assets/images'));
+const images = () => src('src/assets/images/**/*').pipe(imagemin()).pipe(dest('public/assets/images'));
+
 const copy = () =>
     src(['src/assets/fonts/**', 'src/assets/videos/**', 'src/assets/js/**'], {
         base: 'src',
     }).pipe(dest('public'));
 
-const minLibs = () => src(['src/assets/libs/*.js']).pipe(uglify()).pipe(dest('public/assets/libs/'));
+const minifyLibs = () => src(['src/assets/libs/*.js']).pipe(uglify()).pipe(dest('public/assets/libs/'));
 
 const js = () =>
     rollup({
-        input: './src/assets/scripts/scripts.js',
-        plugins: [uglifyRollup.uglify(), commonjs(), nodeResolve(), IS_RPOD && babelPlugin],
+        input: ['./src/assets/scripts/scripts.js'],
+        plugins: [uglifyRollup.uglify(), commonjs(), nodeResolve(), IS_PROD && babelPlugin],
         cache,
     })
         .then((b) => ((cache = b.cache), b))
@@ -54,14 +63,14 @@ const js = () =>
             b.write({
                 file: 'public/assets/js/scripts.js',
                 format: 'iife',
-                sourcemap: IS_RPOD,
+                sourcemap: IS_PROD,
             })
         );
 
-const bundlelibs = () =>
+const bundleLibs = () =>
     rollup({
         input: './src/assets/scripts/libs.js',
-        plugins: [uglifyRollup.uglify(), commonjs(), nodeResolve(), IS_RPOD && babelPlugin],
+        plugins: [uglifyRollup.uglify(), commonjs(), nodeResolve(), IS_PROD && babelPlugin],
         cache,
     })
         .then((b) => ((cache = b.cache), b))
@@ -69,7 +78,7 @@ const bundlelibs = () =>
             b.write({
                 file: 'public/assets/js/libs.js',
                 format: 'iife',
-                sourcemap: IS_RPOD,
+                sourcemap: IS_PROD,
             })
         );
 
@@ -78,14 +87,15 @@ const watchTask = () => {
     watch(`src/**/*.scss`, css).on('change', sync.reload);
     watch('src/**/*.js', js).on('change', sync.reload);
     watch('src/**/*.html', series(html, css)).on('change', sync.reload);
-    // watch('src/assets/images/**/*', img).on('change', sync.reload);
+    // watch('src/assets/images/**/*', images).on('change', sync.reload);
     watch(['src/assets/fonts/**', 'src/assets/videos/**'], copy).on('change', sync.reload);
 };
 
-const build = parallel(html, css, img, js, copy, minLibs, bundlelibs);
+const build = parallel(html, css, images, js, copy, minifyLibs, bundleLibs);
 
 exports.js = js;
 exports.css = css;
-exports.img = img;
+exports.images = images;
+exports.libs = bundleLibs;
 exports.build = build;
 exports.default = series(build, watchTask);
