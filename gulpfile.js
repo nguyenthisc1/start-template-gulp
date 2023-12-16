@@ -45,14 +45,14 @@ const minLibs = () => src(['src/assets/libs/*.js']).pipe(uglify()).pipe(dest('pu
 
 const js = () =>
     rollup({
-        input: './src/assets/script/script.js',
+        input: './src/assets/scripts/scripts.js',
         plugins: [uglifyRollup.uglify(), commonjs(), nodeResolve(), IS_RPOD && babelPlugin],
         cache,
     })
         .then((b) => ((cache = b.cache), b))
         .then((b) =>
             b.write({
-                file: 'public/assets/js/script.js',
+                file: 'public/assets/js/scripts.js',
                 format: 'iife',
                 sourcemap: IS_RPOD,
             })
@@ -60,14 +60,14 @@ const js = () =>
 
 const bundlelibs = () =>
     rollup({
-        input: './src/assets/script/index.js',
+        input: './src/assets/scripts/libs.js',
         plugins: [uglifyRollup.uglify(), commonjs(), nodeResolve(), IS_RPOD && babelPlugin],
         cache,
     })
         .then((b) => ((cache = b.cache), b))
         .then((b) =>
             b.write({
-                file: 'public/assets/js/index.js',
+                file: 'public/assets/js/libs.js',
                 format: 'iife',
                 sourcemap: IS_RPOD,
             })
