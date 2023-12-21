@@ -855,132 +855,26 @@ if ($('[data-split-text]').length) {
   if ($('[data-split-text]').length && !mediaDesktop) {
       const $splitText = $('[data-split-text]');
       $splitText.lettering('words').children('span').lettering('words').find('span:empty').parent().remove();
-
-      // hidden up words
-      // $splitText.each(function (idx, item) {
-      //   const $this = $(this);
-      //   const tl = gsap.timeline({
-      //     scrollTrigger: {
-      //       trigger: $this,
-      //       start: 'top bottom',
-      //       markers: false,
-      //       once: true,
-      //       ease: Expo.easeIn,
-      //     },
-      //   });
-      //   gsap.set($this.find('span span'), {
-      //     y: $this.data('rotate') ? '120%' : '100%',
-      //     rotate: 0,
-      //   });
-      //   tl.to($this.find('span span'), {
-      //     y: 0,
-      //     rotate: 0,
-      //     duration: 1,
-      //     stagger: 0,
-      //     delay: $this.data('delay') ? $this.data('delay') : 0,
-      //     clearProps: 'all',
-      //   });
-      // });
   }
 
   if ($('[data-split-text="words"]').length && mediaDesktop) {
       const $splitTextWords = $('[data-split-text="words"]');
 
       $splitTextWords.lettering('words').children('span').lettering('words').find('span:empty').parent().remove();
-
-      // hidden up words
-      $splitTextWords.each(function (idx, item) {
-          const $this = $(this);
-          const tl = gsap.timeline({
-              scrollTrigger: {
-                  trigger: $this,
-                  start: 'bottom bottom',
-                  end: 'bottom top',
-                  markers: false,
-                  once: true,
-                  ease: Expo.easeIn,
-              },
-          });
-          gsap.set($this.find('span span'), {
-              x: 10,
-              opacity: 0,
-          });
-          tl.to($this.find('span span'), {
-              x: 0,
-              opacity: 1,
-              duration: 1,
-              stagger: {
-                  amount: $this.data('stagger') ? $this.data('stagger') : 1,
-                  // from: '2',
-              },
-              delay: $this.data('delay') ? $this.data('delay') : 0,
-              clearProps: 'all',
-          });
-      });
   }
 
   if ($('[data-split-text="lines"]').length && mediaDesktop) {
       const $splitTextLines = $('[data-split-text="lines"]');
 
       $splitTextLines.lettering('lines').children('span').lettering('lines');
-      // // hidden up lines
-      $splitTextLines.each(function (idx, item) {
-          const $this = $(this);
-          const tl = gsap.timeline({
-              scrollTrigger: {
-                  trigger: $this,
-                  start: 'bottom bottom',
-                  end: 'bottom top',
-                  markers: false,
-                  once: true,
-                  ease: Circ.easeOut,
-              },
-          });
-          gsap.set($this.find('span'), {
-              y: '100%',
-          });
-          tl.to($this.find('span'), {
-              y: 0,
-              duration: $this.data('duration') ? $this.data('duration') : 0.7,
-              stagger: $this.data('stagger') ? $this.data('stagger') : 0.04,
-              delay: $this.data('delay') ? $this.data('delay') : 0,
-              clearProps: 'all',
-          });
-      });
+
   }
 
   if ($('[data-split-text="wordchars"]').length && mediaDesktop) {
       const $splitTextLines = $('[data-split-text="wordchars"]');
-      // const str = $splitTextLines.text();
       $splitTextLines.lettering('words').find('span:empty').remove();
       $splitTextLines.children('span').lettering();
-      // hidden up lines
-      // $splitTextLines.each(function (idx, item) {
-      //   const $this = $(this);
-      //   const tl = gsap.timeline({
-      //     scrollTrigger: {
-      //       trigger: $this,
-      //       start: 'top 90%',
-      //       end: 'bottom top',
-      //       markers: false,
-      //       once: true,
-      //     },
-      //   });
-      //   gsap.set($this.find('span span'), {
-      //     y: '100%',
-      //   });
-      //   tl.to($this.find('span span'), {
-      //     y: 0,
-      //     duration: $this.data('duration') ? $this.data('duration') : 0.5,
-      //     delay: $this.data('delay') ? $this.data('delay') : 0,
-      //     ease: Back.easeOut.config(0.8),
-      //     stagger: {
-      //       amount: $this.data('stagger') ? $this.data('stagger') : 1,
-      //       // from: '2',
-      //     },
-      //     clearProps: 'all',
-      //   });
-      // });
+
   }
 
   if ($('[data-split-text="linesWordchars"]').length) {
@@ -990,6 +884,40 @@ if ($('[data-split-text]').length) {
       $splitTextLines.children('span').lettering('words').find('span:empty').remove();
       $splitTextLines.find('span span').lettering();
   }
+}
+if ($('[data-split-color-line]').length) {
+  const $splitTextLines = $('[data-split-color-line]');
+
+  $splitTextLines.children('span').each(function () {
+      const $this = $(this);
+      $this.append(`<span class="text-mask"></span>`);
+  });
+
+  $splitTextLines.each(function (idx, item) {
+      const $this = $(this);
+      const tl = gsap.timeline({
+          toggleActions: 'play none none reverse',
+          scrollTrigger: {
+              trigger: $this,
+              start: 'top 90%',
+              end: 'bottom 50%',
+              markers: false,
+              scrub: 1,
+              onEnter: !isMobile ? () => imgParallaxRefresh() : null,
+          },
+      });
+
+      // Refresh start/end positions on enter.
+      function imgParallaxRefresh() {
+          ScrollTrigger.refresh();
+      }
+
+      $this.find('.text-mask').addClass($this.data('split-color-line'))
+
+      tl.to($this.find('.text-mask'), {
+          xPercent: 100,
+      });
+  });
 }
 if ($('[data-change-color-text]').length) {
   ScrollTrigger.refresh();

@@ -5,7 +5,7 @@ module.exports = {
     printWidth: 500,
     proseWrap: 'preserve',
     quoteProps: 'as-needed',
-    semi: true,
+    semi: false,
     singleQuote: true,
     tabWidth: 4,
     trailingComma: 'es5',
@@ -17,5 +17,6 @@ module.exports = {
             },
         },
     ],
-    plugins: [require('prettier-plugin-tailwindcss')],
+    plugins: ['prettier-plugin-tailwindcss','@ianvs/prettier-plugin-sort-imports'],
+    tailwindConfig: './tailwind.config.js',
 };
