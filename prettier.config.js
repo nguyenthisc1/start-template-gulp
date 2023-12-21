@@ -2,7 +2,7 @@ module.exports = {
     arrowParens: 'always',
     embeddedLanguageFormatting: 'auto',
     htmlWhitespaceSensitivity: 'css',
-    printWidth: 500,
+    printWidth: 100,
     proseWrap: 'preserve',
     quoteProps: 'as-needed',
     semi: false,
@@ -18,4 +18,4 @@ module.exports = {
         },
     ],
     plugins: ['prettier-plugin-tailwindcss'],
-};
+}
