@@ -23,22 +23,14 @@ const IS_PROD = process.env.NODE_ENV === 'production'
 const babelPlugin = babel({
     babelHelpers: 'assetsd',
     exclude: [/node_module/],
-    presets: [
-        ['@babel/preset-env', { targets: ['defaults'], useBuiltIns: 'usage', corejs: '3.6.5' }],
-    ],
+    presets: [['@babel/preset-env', { targets: ['defaults'], useBuiltIns: 'usage', corejs: '3.6.5' }]],
 })
 
 let cache
 
 const html = () =>
     src('src/*.html')
-        .pipe(
-            data((file) =>
-                JSON.parse(
-                    fs.readFileSync('./src/assets/data/' + path.basename(file.path) + '.json')
-                )
-            )
-        )
+        .pipe(data((file) => JSON.parse(fs.readFileSync('./src/assets/data/' + path.basename(file.path) + '.json'))))
         .pipe(nunjucks.compile())
         .pipe(formatHtml())
         .pipe(dest('public'))
@@ -51,20 +43,18 @@ const css = () =>
         .pipe(uglifycss())
         .pipe(dest('public/assets/styles'))
 
-const images = () =>
-    src('src/assets/images/**/*').pipe(imagemin()).pipe(dest('public/assets/images'))
+const images = () => src('src/assets/images/**/*').pipe(imagemin()).pipe(dest('public/assets/images'))
 
 const copy = () =>
     src(['src/assets/fonts/**', 'src/assets/videos/**', 'src/assets/js/**'], {
         base: 'src',
     }).pipe(dest('public'))
 
-const minifyLibs = () =>
-    src(['src/assets/libs/*.js']).pipe(uglify()).pipe(dest('public/assets/libs/'))
+const minifyLibs = () => src(['src/assets/libs/*.js']).pipe(uglify()).pipe(dest('public/assets/libs/'))
 
 const js = () =>
     rollup({
-        input: ['./src/assets/scripts/scripts.js'],
+        input: 'src/assets/scripts/scripts.js',
         plugins: [uglifyRollup.uglify(), commonjs(), nodeResolve(), IS_PROD && babelPlugin],
         cache,
     })
@@ -74,37 +64,24 @@ const js = () =>
                 file: 'public/assets/js/scripts.js',
                 format: 'iife',
                 sourcemap: IS_PROD,
-            })
-        )
-
-const bundleLibs = () =>
-    rollup({
-        input: './src/assets/scripts/libs.js',
-        plugins: [uglifyRollup.uglify(), commonjs(), nodeResolve(), IS_PROD && babelPlugin],
-        cache,
-    })
-        .then((b) => ((cache = b.cache), b))
-        .then((b) =>
-            b.write({
-                file: 'public/assets/js/libs.js',
-                format: 'iife',
-                sourcemap: IS_PROD,
-            })
+            }),
         )
 
 const watchTask = () => {
     sync.init({ notify: false, server: { baseDir: 'public' } })
     watch(`src/assets/styles/*.scss`, css).on('change', sync.reload)
     watch('src/assets/scripts/*.js', js).on('change', sync.reload)
-    watch(['src/*.html', 'src/components/**/*.html','src/assets/data/**/*.json'], series(html, css)).on('change', sync.reload)
+    watch(['src/*.html', 'src/components/**/*.html', 'src/assets/data/**/*.json'], series(html, css)).on(
+        'change',
+        sync.reload,
+    )
     watch(['src/assets/fonts/**', 'src/assets/videos/**'], copy).on('change', sync.reload)
 }
 
-const build = parallel(html, css, images, js, copy, minifyLibs, bundleLibs)
+const build = parallel(html, css, images, js, copy, minifyLibs)
 
 exports.js = js
 exports.css = css
 exports.images = images
-exports.libs = bundleLibs
 exports.build = build
 exports.default = series(build, watchTask)
