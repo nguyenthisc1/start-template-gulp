@@ -816,24 +816,16 @@ const myLazyLoad = new LazyLoad({
 // =================
 // Page Effects
 // =================
-if ($('[data-scroll-fade-in]').length) {
+if ($('[data-fade-in]').length) {
     ScrollTrigger.matchMedia({
         '(min-width: 320px)': function () {
             $('[data-scroll-fade-in]').each(function () {
                 let $this = $(this)
                 gsap.to($this, {
-                    // opacity: 0,
-                    // y: 60,
-                    // duration: 2,
-                    // ease: Expo.easeOut,
-                    // clearProps: 'all',
                     scrollTrigger: {
                         trigger: $this,
                         start: 'top bottom',
-                        // end: 'bottom top',
                         once: true,
-                        // once: $this.data('once') ? $this.data('once') : true,
-                        // scrub:  $this.data('once') ? $this.data('once') : false,
                         markers: false,
                         onEnter: () => $this.addClass('fade-in'),
                     },
@@ -930,60 +922,6 @@ if ($('[data-split-color-line]').length) {
         })
     })
 }
-if ($('[data-change-color-text]').length) {
-    ScrollTrigger.refresh()
-    const $splitTextLines = $('[data-change-color-text]')
-    $splitTextLines.each(function (idx, item) {
-        const $this = $(this)
-        const tl = gsap.timeline({
-            scrollTrigger: {
-                trigger: $this,
-                start: 'top 90%',
-                end: 'top center',
-                markers: false,
-                scrub: 1.5,
-            },
-        })
-
-        tl.to($this.find('span span'), {
-            color: $this.data('color') ? $this.data('color') : 'var(--color-primary)',
-            stagger: {
-                amount: $this.data('stagger') ? $this.data('stagger') : 1,
-            },
-        })
-    })
-}
-if ($('[data-fade-right-text]').length) {
-    const $dataText = $('[data-fade-right-text]')
-
-    $dataText.each(function (idx, item) {
-        const $this = $(this)
-        const tl = gsap.timeline({
-            scrollTrigger: {
-                trigger: $this.children('span'),
-                start: 'top bottom',
-                markers: false,
-                once: true,
-                ease: Expo.easeIn,
-            },
-        })
-        gsap.set($this.find('span span'), {
-            x: 20,
-            opacity: 0,
-        })
-        tl.to($this.find('span span'), {
-            x: 0,
-            opacity: 1,
-            duration: 1,
-            stagger: {
-                amount: $this.data('stagger') ? $this.data('stagger') : 1,
-                from: '2',
-            },
-            delay: $this.data('delay') ? $this.data('delay') : 0,
-            clearProps: 'all',
-        })
-    })
-}
 if ($('.anim-parallax__item').length) {
     $('.anim-parallax__item').each(function () {
         const $this = $(this)
@@ -997,7 +935,7 @@ if ($('.anim-parallax__item').length) {
                 end: 'bottom top',
                 scrub: true,
                 markers: false,
-                onEnter: !isMobile ? () => imgParalRefresh() : null,
+                // onEnter: !isMobile ? () => imgParalRefresh() : null,
             },
         })
 
