@@ -1,12 +1,12 @@
-import Swiper from 'swiper';
-import { Navigation, Pagination, Parallax, Autoplay } from 'swiper/modules';
-import Lenis from '@studio-freight/lenis';
-import LazyLoad from 'vanilla-lazyload';
-import lightGallery from 'lightgallery';
-import lgVideo from 'lightgallery/plugins/video';
-import Lightpick from 'lightpick';
-import moment from 'moment';
-import 'moment/locale/vi';
+import Swiper from 'swiper'
+import { Navigation, Pagination, Parallax, Autoplay } from 'swiper/modules'
+import Lenis from '@studio-freight/lenis'
+import LazyLoad from 'vanilla-lazyload'
+import lightGallery from 'lightgallery'
+import lgVideo from 'lightgallery/plugins/video'
+import Lightpick from 'lightpick'
+import moment from 'moment'
+import 'moment/locale/vi'
 
 const firefoxAgent = navigator.userAgent.indexOf('Firefox') > -1
 const chromeAgent = navigator.userAgent.indexOf('Chrome') > -1
@@ -906,14 +906,8 @@ if ($('[data-split-color-line]').length) {
                 end: 'bottom 50%',
                 markers: false,
                 scrub: 1,
-                onEnter: !isMobile ? () => imgParallaxRefresh() : null,
             },
         })
-
-        // Refresh start/end positions on enter.
-        function imgParallaxRefresh() {
-            ScrollTrigger.refresh()
-        }
 
         $this.find('.text-mask').addClass($this.data('split-color-line'))
 
@@ -935,14 +929,8 @@ if ($('.anim-parallax__item').length) {
                 end: 'bottom top',
                 scrub: true,
                 markers: false,
-                // onEnter: !isMobile ? () => imgParalRefresh() : null,
             },
         })
-
-        // Refresh start/end positions on enter.
-        function imgParalRefresh() {
-            ScrollTrigger.refresh()
-        }
     })
 }
 if ($('[data-map-area]').length) {
