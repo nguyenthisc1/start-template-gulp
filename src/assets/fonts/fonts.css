@@ -1,0 +1,8 @@
+
+@font-face {
+  font-family: 'lg';
+  src: url('lg.woff2') format('woff2'), url('lg.ttf') format('ttf'), url('lg.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}

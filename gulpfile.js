@@ -71,7 +71,7 @@ const watchTask = () => {
     sync.init({ notify: false, server: { baseDir: 'public' } })
     watch(`src/assets/styles/*.scss`, css).on('change', sync.reload)
     watch('src/assets/scripts/*.js', js).on('change', sync.reload)
-    watch(['src/*.html', 'src/components/**/*.html', 'src/assets/data/**/*.json'], series(html, css)).on(
+    watch(['src/*.html', 'src/block/**/*.html', 'src/components/**/*.html', 'src/assets/data/**/*.json'], series(html, css)).on(
         'change',
         sync.reload,
     )
