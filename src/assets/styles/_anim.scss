@@ -17,30 +17,49 @@
     }
 }
 
-[data-split-text] {
-    &.one-line {
+// [data-split-text] {
+//     &.one-line {
+//         span {
+//             @apply block;
+//             &:first-of-type {
+//                 @apply hidden;
+//             }
+//             span {
+//                 @apply inline-block;
+//                 &:first-of-type {
+//                     @apply inline-block;
+//                 }
+//             }
+//         }
+//     }
+
+//     span {
+//         @apply inline-block overflow-hidden align-top;
+//     }
+// }
+
+[data-split-text='lines'] {
+    > span {
+        @apply block overflow-hidden;
         span {
-            @apply block;
-            &:first-of-type {
-                @apply hidden;
-            }
-            span {
-                @apply inline-block;
-                &:first-of-type {
-                    @apply inline-block;
-                }
-            }
+            @apply w-full;
+        }
+    }
+    span {
+        @apply align-top;
+    }
+}
+
+[data-split-text='linesWordchars'] {
+    > span {
+        @apply block overflow-hidden;
+        span {
+            @apply inline-block;
         }
     }
 
     span {
-        @apply inline-block overflow-hidden align-top;
-    }
-}
-
-[data-split-text='lines'] {
-    > span {
-        @apply block;
+        @apply align-top;
     }
 }
 

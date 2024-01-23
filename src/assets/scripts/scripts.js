@@ -883,6 +883,59 @@ if ($('[data-split-text]').length) {
         $splitTextLines.find('span span').lettering()
     }
 }
+if ($('[data-text-up]').length) {
+  if ($('[data-text-up="lines"]').length) {
+      $('[data-text-up="lines"]').each(function (idx, item) {
+          const $this = $(this)
+          const tl = gsap.timeline({
+              scrollTrigger: {
+                  trigger: $this,
+                  start: 'bottom bottom',
+                  end: 'bottom top',
+                  markers: false,
+                  once: true,
+                  ease: Circ.easeOut,
+              },
+          })
+          gsap.set($this.find('span'), {
+              y: '100%',
+          })
+          tl.to($this.find('span'), {
+              y: 0,
+              duration: $this.data('duration') ? $this.data('duration') : 1,
+              stagger: $this.data('stagger') ? $this.data('stagger') : 0.2,
+              delay: $this.data('delay') ? $this.data('delay') : 0,
+              clearProps: 'all',
+          })
+      })
+  }
+
+  if ($('[data-text-up="linesWordchars"]').length) {
+      $('[data-text-up="linesWordchars"]').each(function (idx, item) {
+          const $this = $(this)
+          const tl = gsap.timeline({
+              scrollTrigger: {
+                  trigger: $this,
+                  start: 'bottom bottom',
+                  end: 'bottom top',
+                  markers: false,
+                  once: true,
+                  ease: Circ.easeOut,
+              },
+          })
+          gsap.set($this.find('span span span'), {
+              y: '100%',
+          })
+          tl.to($this.find('span span span'), {
+              y: 0,
+              duration: $this.data('duration') ? $this.data('duration') : 1,
+              stagger: $this.data('stagger') ? $this.data('stagger') : 0.03,
+              delay: $this.data('delay') ? $this.data('delay') : 0,
+              clearProps: 'all',
+          })
+      })
+  }
+}
 if ($('[data-split-color-line]').length) {
     const $splitTextLines = $('[data-split-color-line]')
 

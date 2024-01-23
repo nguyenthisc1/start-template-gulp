@@ -2,7 +2,7 @@ module.exports = {
     arrowParens: 'always',
     embeddedLanguageFormatting: 'auto',
     htmlWhitespaceSensitivity: 'css',
-    printWidth: 120,
+    printWidth: 200,
     proseWrap: 'preserve',
     quoteProps: 'as-needed',
     semi: false,
