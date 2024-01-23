@@ -857,24 +857,19 @@ if ($('[data-split-text]').length) {
     // ==================================================
     // Begin fade up split text
 
-    if ($('[data-split-text]').length && !mediaDesktop) {
-        const $splitText = $('[data-split-text]')
-        $splitText.lettering('words').children('span').lettering('words').find('span:empty').parent().remove()
-    }
-
-    if ($('[data-split-text="words"]').length && mediaDesktop) {
+    if ($('[data-split-text="words"]').length) {
         const $splitTextWords = $('[data-split-text="words"]')
 
         $splitTextWords.lettering('words').children('span').lettering('words').find('span:empty').parent().remove()
     }
 
-    if ($('[data-split-text="lines"]').length && mediaDesktop) {
+    if ($('[data-split-text="lines"]').length) {
         const $splitTextLines = $('[data-split-text="lines"]')
 
         $splitTextLines.lettering('lines').children('span').lettering('lines')
     }
 
-    if ($('[data-split-text="wordchars"]').length && mediaDesktop) {
+    if ($('[data-split-text="wordchars"]').length) {
         const $splitTextLines = $('[data-split-text="wordchars"]')
         $splitTextLines.lettering('words').find('span:empty').remove()
         $splitTextLines.children('span').lettering()
@@ -965,9 +960,9 @@ if ($('[data-map-area]').length) {
 if ($('.hamburger').length) {
     $('.hamburger').on('click', function (e) {
         e.stopPropagation()
-        $('.header,.nav-mobile,.hamburger').toggleClass('active')
+        $('.header,.nav-mobile,.hamburger').toggleClass('active-nav')
 
-        let activeNav = $('.nav-mobile').hasClass('active')
+        let activeNav = $('.nav-mobile').hasClass('active-nav')
 
         if (activeNav) {
             $('.nav-mobile').css('transition-delay', '0s')
@@ -1116,8 +1111,8 @@ setClickPropagation($('.nav .wrapper, .modal .modal-wrapper__inner > *, .custom-
 
 // window click stop event
 $(window).on('click', function (e) {
-    if ($('.header,.nav').hasClass('active')) {
-        $('.header,.nav,[data-hamburger]').removeClass('active')
+    if ($('.header,.nav').hasClass('active-nav')) {
+        $('.header,.nav,[data-hamburger]').removeClass('active-nav')
         startScroll()
     }
     if ($('.modal').hasClass('active')) {
