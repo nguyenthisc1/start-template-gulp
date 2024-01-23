@@ -1,68 +1,63 @@
 @keyframes rotation {
-  0% {
-      transform: rotate(0deg);
-  }
-  100% {
-      transform: rotate(-360deg);
-  }
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(-360deg);
+    }
 }
 
 @keyframes move-x {
-  0% {
-      transform: translate3d(-90px, 0, 0);
-  }
+    0% {
+        transform: translate3d(-90px, 0, 0);
+    }
 
-  100% {
-      transform: translate3d(85px, 0, 0);
-  }
+    100% {
+        transform: translate3d(85px, 0, 0);
+    }
 }
 
 [data-split-text] {
-  &.one-line {
-      span {
-          @apply block;
-          &:first-of-type {
-              @apply hidden;
-          }
-          span {
-              @apply inline-block;
-              &:first-of-type {
-                  @apply inline-block;
-              }
-          }
-      }
-  }
+    &.one-line {
+        span {
+            @apply block;
+            &:first-of-type {
+                @apply hidden;
+            }
+            span {
+                @apply inline-block;
+                &:first-of-type {
+                    @apply inline-block;
+                }
+            }
+        }
+    }
 
-  span {
-      @apply inline-block overflow-hidden align-top;
-  }
+    span {
+        @apply inline-block overflow-hidden align-top;
+    }
 }
 
 [data-split-text='lines'] {
-  > span {
-      @apply block -ml-[10%] w-[120%] text-center;
-      span {
-        @apply w-full;
-      }
-  }
+    > span {
+        @apply block;
+    }
 }
 
 [data-split-color-line] {
-  > span {
-      @apply relative inline-flex items-center overflow-hidden;
-      span {
-          &:nth-of-type(2) {
-              @apply absolute left-0 top-0 h-[115%] w-full origin-[100%_50%] opacity-70;
-          }
-      }
-  }
+    > span {
+        @apply relative inline-flex items-center overflow-hidden;
+        span {
+            &:nth-of-type(2) {
+                @apply absolute left-0 top-0 h-[115%] w-full origin-[100%_50%] opacity-70;
+            }
+        }
+    }
 }
 
 [data-clip-circle] {
-  .image {
-      clip-path: circle(77% at 50% 50%);
-      @apply overflow-hidden;
-  }
+    .image {
+        clip-path: circle(77% at 50% 50%);
+        @apply overflow-hidden;
+    }
 }
-
-
