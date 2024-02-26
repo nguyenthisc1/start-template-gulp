@@ -10,13 +10,12 @@ import 'moment/locale/vi'
 
 const firefoxAgent = navigator.userAgent.indexOf('Firefox') > -1
 const chromeAgent = navigator.userAgent.indexOf('Chrome') > -1
-const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Nokia|Opera Mini/i.test(navigator.userAgent)
-    ? true
-    : false
+const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Nokia|Opera Mini/i.test(navigator.userAgent) ? true : false
 const isLoading = $('.loading').length
 const isHero = $('.hero').length
 const isHome = window.location.pathname == '/'
 let lenis
+const mediaDesktopLarge = $(window).width() > 1439
 const mediaDesktop = $(window).width() > 1023
 const mediaTablet = $(window).width() > 76
 
@@ -365,7 +364,7 @@ if ($('#gallery').length) {
 // =================
 // Scroll Smooth
 // =================
-const hasSmooth = $('body').hasClass('tt-scroll-smooth') && chromeAgent
+const hasSmooth = $('body').hasClass('tt-scroll-smooth') && chromeAgent && mediaDesktop
 if (hasSmooth) {
     gsap.registerPlugin(ScrollTrigger)
     lenis = new Lenis({
@@ -656,9 +655,7 @@ if ($('body').not('.is-mobile').hasClass('tt-magic-cursor')) {
                         height: $(this).data('cursor-size') ? $(this).data('cursor-size') : 125,
                         opacity: 1,
                         borderWidth: 1,
-                        borderColor: $(this).data('cursor-border-color')
-                            ? $(this).data('cursor-border-color')
-                            : '#ffffff',
+                        borderColor: $(this).data('cursor-border-color') ? $(this).data('cursor-border-color') : '#ffffff',
                         backgroundColor: '#fff',
                     })
                     gsap.to(ball, {
@@ -767,9 +764,7 @@ if ($('body').not('.is-mobile').hasClass('tt-magic-cursor')) {
     })
 
     // Hide on hover.
-    $(
-        'a, button,.hide-cursor,.more-button,.main-button,.filter-button,.custom-select,.swiper-button-prev,.swiper-button-next',
-    ) // class "hide-cursor" is for global use.
+    $('a, button,.hide-cursor,.more-button,.main-button,.filter-button,.custom-select,.swiper-button-prev,.swiper-button-next') // class "hide-cursor" is for global use.
         .not('.not-hide-cursor') // omit from selection (class "not-hide-cursor" is for global use).
         .on('mouseenter', function () {
             gsap.to($ball, { duration: 0.3, scale: 0, opacity: 0 })
@@ -817,37 +812,37 @@ const myLazyLoad = new LazyLoad({
 // Page Effects
 // =================
 if ($('[data-fade-in]').length) {
-    ScrollTrigger.matchMedia({
-        '(min-width: 320px)': function () {
-            $('[data-scroll-fade-in]').each(function () {
-                let $this = $(this)
-                gsap.to($this, {
-                    scrollTrigger: {
-                        trigger: $this,
-                        start: 'top bottom',
-                        once: true,
-                        markers: false,
-                        onEnter: () => $this.addClass('fade-in'),
-                    },
-                })
-            })
-        },
+    $('[data-fade-in]').each(function () {
+        let $this = $(this)
+        gsap.to($this, {
+            scrollTrigger: {
+                trigger: $this.data('trigger') ? $this.data('trigger') : $this,
+                start: $this.data('start') ? $this.data('start') : 'top bottom',
+                delay: $this.data('delay') ? $this.data('delay') : 0,
+                once: true,
+                markers: false,
+                onEnter: () => $this.addClass('fade-in'),
+            },
+        })
     })
 }
-if ($('[data-fade-in-item]').length && mediaDesktop) {
-    const $list = gsap.utils.toArray($('[data-fade-in-item]').children())
-    gsap.from($list, {
-        opacity: 0,
-        y: 12,
-        stagger: 0.05,
-        clearProps: 'all',
-        scrollTrigger: {
-            trigger: $('[data-fade-in-item]'),
-            start: mediaDesktop ? 'top 70%' : 'top bottom',
-            scrub: false,
-            markers: false,
-            once: true,
-        },
+if ($('[data-fade-in-item]').length) {
+    $('[data-fade-in-item').each(function () {
+        const $this = $(this)
+        gsap.from($this.find('> *'), {
+            opacity: 0,
+            y: 12,
+            stagger: $this.data('stagger') ? $this.data('stagger') : 0.05,
+            delay: $this.data('delay') ? $this.data('delay') : 0,
+            clearProps: 'all',
+            scrollTrigger: {
+                trigger: $this.data('trigger') ? $this.data('trigger') : $this,
+                start: $this.data('start') ? $this.data('start') : mediaDesktop ? 'top 70%' : 'top bottom',
+                scrub: false,
+                markers: false,
+                once: true,
+            },
+        })
     })
 }
 if ($('[data-split-text]').length) {
@@ -884,57 +879,58 @@ if ($('[data-split-text]').length) {
     }
 }
 if ($('[data-text-up]').length) {
-  if ($('[data-text-up="lines"]').length) {
-      $('[data-text-up="lines"]').each(function (idx, item) {
-          const $this = $(this)
-          const tl = gsap.timeline({
-              scrollTrigger: {
-                  trigger: $this,
-                  start: 'bottom bottom',
-                  end: 'bottom top',
-                  markers: false,
-                  once: true,
-                  ease: Circ.easeOut,
-              },
-          })
-          gsap.set($this.find('span'), {
-              y: '100%',
-          })
-          tl.to($this.find('span'), {
-              y: 0,
-              duration: $this.data('duration') ? $this.data('duration') : 1,
-              stagger: $this.data('stagger') ? $this.data('stagger') : 0.2,
-              delay: $this.data('delay') ? $this.data('delay') : 0,
-              clearProps: 'all',
-          })
-      })
-  }
+    if ($('[data-text-up="lines"]').length) {
+        $('[data-text-up="lines"]').each(function (idx, item) {
+            const $this = $(this)
+            const tl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: $this.data('trigger') ? $this.data('trigger') : $this,
+                    start: $this.data('start') ? $this.data('start') : 'bottom bottom',
+                    end: $this.data('end') ? $this.data('end') : 'bottom top',
+                    delay: $this.data('start') ? $this.data('start') : 0,
+                    markers: false,
+                    once: true,
+                    ease: Circ.easeOut,
+                },
+            })
+            gsap.set($this.find('span'), {
+                y: '100%',
+            })
+            tl.to($this.find('span'), {
+                y: 0,
+                duration: $this.data('duration') ? $this.data('duration') : 1,
+                stagger: $this.data('stagger') ? $this.data('stagger') : 0.2,
+                delay: $this.data('delay') ? $this.data('delay') : 0,
+                clearProps: 'all',
+            })
+        })
+    }
 
-  if ($('[data-text-up="linesWordchars"]').length) {
-      $('[data-text-up="linesWordchars"]').each(function (idx, item) {
-          const $this = $(this)
-          const tl = gsap.timeline({
-              scrollTrigger: {
-                  trigger: $this,
-                  start: 'bottom bottom',
-                  end: 'bottom top',
-                  markers: false,
-                  once: true,
-                  ease: Circ.easeOut,
-              },
-          })
-          gsap.set($this.find('span span span'), {
-              y: '100%',
-          })
-          tl.to($this.find('span span span'), {
-              y: 0,
-              duration: $this.data('duration') ? $this.data('duration') : 1,
-              stagger: $this.data('stagger') ? $this.data('stagger') : 0.03,
-              delay: $this.data('delay') ? $this.data('delay') : 0,
-              clearProps: 'all',
-          })
-      })
-  }
+    if ($('[data-text-up="linesWordchars"]').length) {
+        $('[data-text-up="linesWordchars"]').each(function (idx, item) {
+            const $this = $(this)
+            const tl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: $this.data('trigger') ? $this.data('trigger') : $this,
+                    start: $this.data('start') ? $this.data('start') : 'bottom bottom',
+                    end: $this.data('end') ? $this.data('end') : 'bottom top',
+                    markers: false,
+                    once: true,
+                    ease: Circ.easeOut,
+                },
+            })
+            gsap.set($this.find('span span span'), {
+                y: '100%',
+            })
+            tl.to($this.find('span span span'), {
+                y: 0,
+                duration: $this.data('duration') ? $this.data('duration') : 1,
+                stagger: $this.data('stagger') ? $this.data('stagger') : 0.03,
+                delay: $this.data('delay') ? $this.data('delay') : 0,
+                clearProps: 'all',
+            })
+        })
+    }
 }
 if ($('[data-split-color-line]').length) {
     const $splitTextLines = $('[data-split-color-line]')
@@ -949,9 +945,9 @@ if ($('[data-split-color-line]').length) {
         const tl = gsap.timeline({
             toggleActions: 'play none none reverse',
             scrollTrigger: {
-                trigger: $this,
-                start: 'top 90%',
-                end: 'bottom 50%',
+                trigger: $this.data('trigger') ? $this.data('trigger') : $this,
+                start: $this.data('start') ? $this.data('start') : 'top 90%',
+                end: $this.data('end') ? $this.data('end') : 'bottom 50%',
                 markers: false,
                 scrub: 1,
             },
@@ -972,9 +968,9 @@ if ($('.anim-parallax__item').length) {
             yPercent: $this.data('speed') ? $this.data('speed') : 25,
             ease: 'none',
             scrollTrigger: {
-                trigger: $this,
-                start: 'top bottom',
-                end: 'bottom top',
+                trigger: $this.data('trigger') ? $this.data('trigger') : $this,
+                start: $this.data('start') ? $this.data('start') : 'top bottom',
+                end: $this.data('end') ? $this.data('end') : 'bottom top',
                 scrub: true,
                 markers: false,
             },
@@ -1019,10 +1015,7 @@ if ($('.hamburger').length) {
 
         if (activeNav) {
             $('.nav-mobile').css('transition-delay', '0s')
-            $('.nav-mobile .custom-select').css(
-                'transition-delay',
-                ($('.nav-mobile .nav ul li').length + 5) * 0.1 + 's',
-            )
+            $('.nav-mobile .custom-select').css('transition-delay', ($('.nav-mobile .nav ul li').length + 5) * 0.1 + 's')
             stopScroll()
         }
 
