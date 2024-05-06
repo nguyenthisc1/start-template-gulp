@@ -98,11 +98,9 @@ body {
 img {
     @apply object-cover;
     &:not([src]):not([srcset]) {
-      visibility: hidden;
+        visibility: hidden;
     }
 }
-
-
 
 .b1 {
     @apply text-base leading-[1.625rem] md:text-lg md:leading-7;
@@ -115,7 +113,6 @@ img {
 .tag {
     @apply text-sm font-light tracking-widest md:text-lg md:leading-7;
 }
-
 
 select,
 textarea,
@@ -136,12 +133,10 @@ input[type='color'] {
     font-size: 16px;
 }
 
-
-@media screen and (-webkit-min-device-pixel-ratio:0) {
-  select:focus,
-  textarea:focus,
-  input:focus {
-    font-size: 16px;
-  }
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+    select:focus,
+    textarea:focus,
+    input:focus {
+        font-size: 16px;
+    }
 }
-

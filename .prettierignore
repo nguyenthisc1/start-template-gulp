@@ -1,0 +1,10 @@
+
+src/assets/libs/** 
+public
+pnpm-lock.yaml
+.eslintrc.js
+package.json
+prettier.config.js
+readme.md
+gulpfile.js
+tailwind.config.js

@@ -17,6 +17,12 @@
     }
 }
 
+@keyframes enable-pointer-events {
+    to {
+        pointer-events: auto;
+    }
+}
+
 // [data-split-text] {
 //     &.one-line {
 //         span {

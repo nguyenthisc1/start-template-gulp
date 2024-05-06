@@ -5,8 +5,10 @@
     "main": "gulpfile.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "start": "gulp",
-        "build": "gulp build"
+        "dev": "gulp",
+        "build": "gulp build",
+        "format": "prettier --check --ignore-path .prettierignore .",
+        "format:fix": "prettier --write --ignore-path .prettierignore ."
     },
     "author": "nguynthisc1@gmail.com",
     "license": "ISC",

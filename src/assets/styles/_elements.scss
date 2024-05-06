@@ -176,7 +176,7 @@
         @apply before:origin-left before:scale-x-100;
     }
     &::before {
-        @apply bg-dark absolute -bottom-1 h-[1px] w-full origin-right scale-x-0 transition-transform duration-[var(--t)] content-[''];
+        @apply absolute -bottom-1 h-[1px] w-full origin-right scale-x-0 bg-dark transition-transform duration-[var(--t)] content-[''];
     }
 }
 

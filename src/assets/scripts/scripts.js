@@ -299,6 +299,98 @@ if ($('.detail-slider').length) {
     }
 }
 
+if ($('.scale-slider').length) {
+    $('.scale-slider').each(function () {
+        let $slider = $(this)
+
+        let $dataSpeed
+        let $dataLoop = $slider.attr('data-loop')
+        let $dataAutoplay = $slider.data('autoplay') ? { delay: $slider.data('autoplay') } : $slider.data('autoplay')
+        if ($slider.is('[data-speed]')) {
+            $dataSpeed = $slider.data('speed')
+        } else {
+            $dataSpeed = 900 // by default
+        }
+
+        const $sliderSwiper = new Swiper($slider[0], {
+            modules: [Parallax, Autoplay, Pagination, Navigation],
+            direction: 'horizontal',
+            speed: $dataSpeed,
+            loop: $dataLoop,
+            autoplay: $dataAutoplay,
+            slidesPerView: 1.75,
+            pagination: {
+                el: '.scale-slider-pagination',
+                type: 'fraction',
+            },
+            centeredSlides: true,
+            parallax: true,
+            initialSlide: 1,
+            navigation: {
+                nextEl: '.scale-slider-button.next',
+                prevEl: '.scale-slider-button.prev',
+            },
+            breakpoints: {
+                320: {
+                    slidesPerView: 1.2,
+                },
+                768: {
+                    slidesPerView: 1.5,
+                },
+
+                1024: {
+                    slidesPerView: 1.5,
+                },
+
+                1280: {
+                    slidesPerView: 1.8,
+                },
+            },
+            on: {
+                init: function () {
+                    let $this = this
+                    let $slideActive = $($this.slides[$this.activeIndex])
+                },
+
+                transitionStart: function () {
+                    let $this = this
+                    let $slideActive = $($this.slides[$this.activeIndex])
+                },
+
+                transitionEnd: function () {
+                    let $this = this
+                    let $slideActive = $($this.slides[$this.activeIndex])
+                },
+            },
+        })
+
+        if (!isMobile) {
+            console.log($sliderSwiper)
+            $sliderSwiper.on('click', function (e, i) {
+                if (i.clientX > e.width / 2) {
+                    this.slideNext()
+
+                    // $sliderSwiper.isEnd
+                    //     ? gsap.to('#ball', {
+                    //           opacity: 0.5,
+                    //       })
+                    //     : null
+
+                    return
+                } else {
+                    this.slidePrev()
+                    // $sliderSwiper.isBeginning
+                    //     ? gsap.to('#ball', {
+                    //           opacity: 0.5,
+                    //       })
+                    //     : null
+                    return
+                }
+            })
+        }
+    })
+}
+
 // =====================================================
 // Light Gallery
 // Source: https://github.com/sachinchoolur/lightGallery
@@ -814,14 +906,16 @@ const myLazyLoad = new LazyLoad({
 if ($('[data-fade-in]').length) {
     $('[data-fade-in]').each(function () {
         let $this = $(this)
-        gsap.to($this, {
+        gsap.from($this, {
+            opacity: 0,
+            y: 12,
+            delay: $this.data('delay') ? $this.data('delay') : 0,
+            clearProps: 'all',
             scrollTrigger: {
                 trigger: $this.data('trigger') ? $this.data('trigger') : $this,
                 start: $this.data('start') ? $this.data('start') : 'top bottom',
-                delay: $this.data('delay') ? $this.data('delay') : 0,
                 once: true,
                 markers: false,
-                onEnter: () => $this.addClass('fade-in'),
             },
         })
     })

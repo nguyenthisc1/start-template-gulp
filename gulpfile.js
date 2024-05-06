@@ -71,17 +71,16 @@ const watchTask = () => {
     sync.init({ notify: false, server: { baseDir: 'public' } })
     watch(`src/assets/styles/*.scss`, css).on('change', sync.reload)
     watch('src/assets/scripts/*.js', js).on('change', sync.reload)
-    watch(['src/*.html', 'src/block/**/*.html', 'src/components/**/*.html', 'src/assets/data/**/*.json'], series(html, css)).on(
-        'change',
-        sync.reload,
-    )
+    watch(['src/*.html', 'src/block/**/*.html', 'src/components/**/*.html', 'src/assets/data/**/*.json'], series(html, css)).on('change', sync.reload)
     watch(['src/assets/fonts/**', 'src/assets/videos/**'], copy).on('change', sync.reload)
 }
 
-const build = parallel(html, css, images, js, copy, minifyLibs)
+const build = parallel(html, css, js)
 
 exports.js = js
 exports.css = css
 exports.images = images
+exports.copy = copy
+exports.libs = minifyLibs
 exports.build = build
 exports.default = series(build, watchTask)
