@@ -1,5 +1,5 @@
 
-src/assets/libs/** 
+src/assets/scripts/libs/**
 public
 pnpm-lock.yaml
 .eslintrc.js

@@ -13,9 +13,9 @@
     @import './components/nav';
     @import './components/elements';
     @import './components/components';
-  }
+}
 
-  @layer utilities {
+@layer utilities {
     @import './utilities/util';
     @import './utilities/anim';
 }

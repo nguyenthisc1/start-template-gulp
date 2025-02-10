@@ -157,36 +157,35 @@ const initDatePicker = () => {
 
 // === SMOOTH SCROLL LENIS ===
 const initLenis = () => {
-const hasSmooth = $('body').hasClass('tt-scroll-smooth') && chromeAgent && mediaDesktop
-if (hasSmooth) {
-    gsap.registerPlugin(ScrollTrigger)
-    lenis = new Lenis({
-        duration: $('body').data('lenis-duration') ? $('body').data('lenis-duration') : 0.5,
-        lerp: 0,
-    })
+    const hasSmooth = $('body').hasClass('tt-scroll-smooth') && chromeAgent && mediaDesktop
+    if (hasSmooth) {
+        gsap.registerPlugin(ScrollTrigger)
+        lenis = new Lenis({
+            duration: $('body').data('lenis-duration') ? $('body').data('lenis-duration') : 0.5,
+            lerp: 0,
+        })
 
-    // lenis.on('scroll', (e) => {
-    //     console.log(e);
-    // });
+        // lenis.on('scroll', (e) => {
+        //     console.log(e);
+        // });
 
-    function raf(time) {
-        lenis.raf(time)
+        function raf(time) {
+            lenis.raf(time)
+            requestAnimationFrame(raf)
+        }
+
         requestAnimationFrame(raf)
+
+        if ($('body').hasClass('tt-transition')) {
+            lenis.stop()
+        }
+
+        lenis.on('scroll', ScrollTrigger.update)
+
+        gsap.ticker.add((time) => {
+            lenis.raf(time * 1000)
+        })
     }
-
-    requestAnimationFrame(raf)
-
-    if ($('body').hasClass('tt-transition')) {
-        lenis.stop()
-    }
-
-    lenis.on('scroll', ScrollTrigger.update)
-
-    gsap.ticker.add((time) => {
-        lenis.raf(time * 1000)
-    })
-}
-
 }
 
 export const initUi = () => {
