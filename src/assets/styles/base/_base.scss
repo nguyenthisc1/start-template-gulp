@@ -60,6 +60,7 @@ html.lenis {
 .lenis.lenis-scrolling iframe {
     pointer-events: none;
 }
+
 body {
     @apply b1 font-primary font-light text-black;
     &.scroll-hidden,
