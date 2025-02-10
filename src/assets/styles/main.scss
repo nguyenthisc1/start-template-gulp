@@ -2,22 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
-// @layer base {
-//     @import './base/base';
-// }
+@layer base {
+    @import './base/global';
+}
 
-// @layer components {
-//     @import './components/loading';
-//     @import './components/header';
-//     @import './components/footer';
-//     @import './components/nav';
-//     @import './components/elements';
-//     @import './components/components';
-//   }
+@layer components {
+    @import './components/loading';
+    @import './components/header';
+    @import './components/footer';
+    @import './components/nav';
+    @import './components/elements';
+    @import './components/components';
+  }
 
-//   @layer utilities {
-//     @import './utilities/util';
-//     @import './utilities/anim';
-// }
+  @layer utilities {
+    @import './utilities/util';
+    @import './utilities/anim';
+}
 
-// @import './utilities/libs';
+@import './utilities/libs';
