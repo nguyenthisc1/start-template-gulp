@@ -43,7 +43,7 @@ const css = () =>
         .pipe(sass({ api: 'modern-compiler', silenceDeprecations: ['mixed-decls', 'color-functions', 'global-builtin', 'import']}).on("error", sass.logError))
         .pipe(postcss([tailwindcss("tailwind.config.js"), cssnano()]))
         .pipe(concat("main.css"))
-        .pipe(sourcemaps.write("."))
+        // .pipe(sourcemaps.write("."))
         .pipe(dest("public/assets/styles"));
 
 // Optimize Images
