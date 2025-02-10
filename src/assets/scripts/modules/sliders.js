@@ -1,0 +1,5 @@
+import Swiper from 'swiper'
+import { Navigation, Pagination, Parallax, Autoplay } from 'swiper/modules'
+import lightGallery from 'lightgallery'
+import lgVideo from 'lightgallery/plugins/video'
+import Lightpick from 'lightpick'

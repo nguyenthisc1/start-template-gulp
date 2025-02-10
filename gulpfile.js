@@ -40,7 +40,8 @@ const html = () =>
 const css = () =>
     src("src/assets/styles/main.scss")
         .pipe(sourcemaps.init())
-        .pipe(sass().on("error", sass.logError))
+        .pipe(sass({   outputStyle: 'compressed',
+          quietDeps: true}).on("error", sass.logError))
         .pipe(postcss([tailwindcss("tailwind.config.js"), cssnano()]))
         .pipe(concat("main.css"))
         .pipe(sourcemaps.write("."))
@@ -70,7 +71,7 @@ const js = () =>
       .then((b) => ((cache = b.cache), b))
       .then((b) =>
           b.write({
-              file: 'public/assets/js/main.js',
+              file: 'public/assets/scripts/main.js',
               format: 'iife',
               sourcemap: IS_PROD,
           }),
@@ -81,7 +82,7 @@ const watchTask = () => {
   sync.init({ notify: false, server: { baseDir: 'public' } })
   watch('src/assets/styles/**/*.scss', css).on('change', sync.reload)
   watch('src/assets/scripts/**/*.js', js).on('change', sync.reload)
-  watch(['src/*.html', 'src/components/**/*.html', 'src/assets/data/**/*.json'], series(html, css)).on(
+  watch(['src/*.html', 'src/components/**/*.html', 'src/block/**/*.html', 'src/assets/data/**/*.json'], series(html, css)).on(
       'change',
       sync.reload,
   )

@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en">
     <head>
@@ -56,17 +57,19 @@
 
         {% include 'components/header.html' %}
 
-        <!-- *************************************
-        *********** Begin Main *************
-        ************************************** -->
+        <!-- Begin main -->
         <main class="main">{% block main %}{% endblock %}</main>
         <!-- End main -->
 
         {%include 'components/footer.html' %}
 
         <!-- Begin script -->
-        <script defer src="assets/js/libs.min.js"></script>
-        <script defer src="assets/js/main.js"></script>
+              <!-- <script defer src="assets/libs/jquery.min.js"></script>
+        <script defer src="assets/libs/gsap.min.js"></script>
+        <script defer src="assets/libs/scrollTrigger.min.js"></script>
+        <script defer src="assets/libs/lettering.js"></script> -->
+        <script defer src="assets/scripts/libs.min.js"></script>
+        <script defer src="assets/scripts/main.js"></script>
         <!-- End script -->
     </body>
 </html>
