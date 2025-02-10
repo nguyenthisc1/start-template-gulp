@@ -40,8 +40,7 @@ const html = () =>
 const css = () =>
     src("src/assets/styles/main.scss")
         .pipe(sourcemaps.init())
-        .pipe(sass({   outputStyle: 'compressed',
-          quietDeps: true}).on("error", sass.logError))
+        .pipe(sass({ api: 'modern-compiler', silenceDeprecations: ['mixed-decls', 'color-functions', 'global-builtin', 'import']}).on("error", sass.logError))
         .pipe(postcss([tailwindcss("tailwind.config.js"), cssnano()]))
         .pipe(concat("main.css"))
         .pipe(sourcemaps.write("."))
