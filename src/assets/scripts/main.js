@@ -1267,11 +1267,15 @@
 
 import { initUi } from './modules/initUi'
 import { animations } from './modules/animations'
+import { setClickPropagation, handleGlobalClick } from './modules/windowClickHander'
 
 // === INITIALIZATION ===
 const initialize = () => {
     initUi()
     animations()
+
+    setClickPropagation('.nav .wrapper, .modal .modal-wrapper__inner > *, .custom-select .custom-select__body')
+    handleGlobalClick()
 }
 
 $(document).ready(initialize)

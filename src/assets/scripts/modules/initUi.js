@@ -1,20 +1,19 @@
 // === IMPORTS ===
-import Lenis from '@studio-freight/lenis'
 import LazyLoad from 'vanilla-lazyload'
 
-import moment from 'moment'
-import 'moment/locale/vi'
+// import moment from 'moment'
+// import 'moment/locale/vi'
 
 // === DEVICE AND BROWSER DETECTION ===
-const isFirefox = navigator.userAgent.includes('Firefox')
-const isChrome = navigator.userAgent.includes('Chrome')
-const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Nokia|Opera Mini/i.test(navigator.userAgent)
-const mediaDesktopLarge = $(window).width() > 1439
-const mediaDesktop = $(window).width() > 1023
-const mediaTablet = $(window).width() > 768 // Fixed typo: `76` -> `768` for tablets
-const isLoading = $('.loading').length > 0
-const isHero = $('.hero').length > 0
-const isHome = window.location.pathname === '/'
+export const isFirefox = navigator.userAgent.includes('Firefox')
+export const isChrome = navigator.userAgent.includes('Chrome')
+export const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Nokia|Opera Mini/i.test(navigator.userAgent)
+export const mediaDesktopLarge = $(window).width() > 1439
+export const mediaDesktop = $(window).width() > 1023
+export const mediaTablet = $(window).width() > 768 // Fixed typo: `76` -> `768` for tablets
+export const isLoading = $('.loading').length > 0
+export const isHero = $('.hero').length > 0
+export const isHome = window.location.pathname === '/'
 
 // === CUSTOM PROPERTIES ===
 const setCustomVHProperty = () => {
@@ -55,26 +54,6 @@ const addBrowserClasses = () => {
     if (isFirefox) body.addClass('is-firefox')
     if (isChrome) body.addClass('is-chrome')
     if (isMobile) body.addClass('is-mobile')
-}
-
-// === SCROLL HANDLING (Lenis) ===
-let lenis
-const hasSmoothScroll = typeof lenis !== 'undefined'
-
-const stopScroll = () => {
-    if (hasSmoothScroll) {
-        lenis.stop()
-    } else {
-        $('body').addClass('scroll-hidden')
-    }
-}
-
-const startScroll = () => {
-    if (hasSmoothScroll) {
-        lenis.start()
-    } else {
-        $('body').removeClass('scroll-hidden')
-    }
 }
 
 // === LAZY LOADING ===
@@ -151,39 +130,6 @@ const initDatePicker = () => {
             numberOfMonths: $(window).width() > 1023 ? 2 : 1,
             format: 'Do MMMM YYYY, dddd',
             singleDate: false,
-        })
-    }
-}
-
-// === SMOOTH SCROLL LENIS ===
-const initLenis = () => {
-    const hasSmooth = $('body').hasClass('tt-scroll-smooth') && chromeAgent && mediaDesktop
-    if (hasSmooth) {
-        gsap.registerPlugin(ScrollTrigger)
-        lenis = new Lenis({
-            duration: $('body').data('lenis-duration') ? $('body').data('lenis-duration') : 0.5,
-            lerp: 0,
-        })
-
-        // lenis.on('scroll', (e) => {
-        //     console.log(e);
-        // });
-
-        function raf(time) {
-            lenis.raf(time)
-            requestAnimationFrame(raf)
-        }
-
-        requestAnimationFrame(raf)
-
-        if ($('body').hasClass('tt-transition')) {
-            lenis.stop()
-        }
-
-        lenis.on('scroll', ScrollTrigger.update)
-
-        gsap.ticker.add((time) => {
-            lenis.raf(time * 1000)
         })
     }
 }
